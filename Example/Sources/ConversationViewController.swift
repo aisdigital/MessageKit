@@ -240,6 +240,7 @@ internal class ConversationViewController: MessagesViewController {
     // MARK: - Helpers
     
     func makeButton(named: String) -> InputBarButtonItem {
+        
         return InputBarButtonItem()
             .configure {
                 $0.spacing = .fixed(10)
@@ -249,9 +250,29 @@ internal class ConversationViewController: MessagesViewController {
                 $0.tintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
             }.onDeselected {
                 $0.tintColor = UIColor.lightGray
-            }.onTouchUpInside { _ in
-                print("Item Tapped")
+            }.onTouchUpInside { [buttonName = named]_ in
+                
+                switch buttonName {
+                case "ic_library":
+                    
+                    self.sendImage()
+                    
+                default:
+                    print("Item tapped")
+                }
         }
+    }
+    
+    fileprivate func sendImage() {
+
+        guard let image = SampleData.shared.messageImages.randomElement() else { return }
+        
+        let imageMessage = MockMessage(image: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+        
+        messageList.append(imageMessage)
+        messagesCollectionView.insertSections([messageList.count - 1])
+
+        messagesCollectionView.scrollToBottom()
     }
 }
 
@@ -326,12 +347,14 @@ extension ConversationViewController: MessagesDisplayDelegate {
 
         if isFromCurrentSender(message: message) {
             let configurationClosure = { (view: MessageContainerView) in
+            
                 super.view.layoutSubviews()
                 let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight, UIRectCorner.bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
                 
                 let mask = CAShapeLayer()
                 mask.path = path.cgPath
                 view.layer.mask = mask
+                
                 
             }
             return .custom(configurationClosure)

@@ -272,23 +272,21 @@ extension ConversationViewController: MessagesDataSource {
     }
 
     func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        if indexPath.section % 3 == 0 {
-            return NSAttributedString(string: MessageKitDateFormatter.shared.string(from: message.sentDate), attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 10), NSAttributedStringKey.foregroundColor: UIColor.darkGray])
-        }
         return nil
     }
     
     func messageTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-        let name = message.sender.displayName
-        return NSAttributedString(string: name, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .caption1)])
+        return nil
     }
 
     func messageBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
-
+        let senderName = message.sender.displayName
         let dateString = formatter.string(from: message.sentDate)
-        return NSAttributedString(string: dateString, attributes: [NSAttributedStringKey.font: UIFont.preferredFont(forTextStyle: .caption2)])
+        
+        let final: String = "\(senderName) em \(dateString)"
+        
+        return NSAttributedString(string: final)
     }
-
 }
 
 // MARK: - MessagesDisplayDelegate
@@ -298,7 +296,12 @@ extension ConversationViewController: MessagesDisplayDelegate {
     // MARK: - Text Messages
 
     func textColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? .white : .darkText
+        
+        if isFromCurrentSender(message: message) {
+            return UIColor.white
+        }
+        
+        return UIColor.gray
     }
 
     func detectorAttributes(for detector: DetectorType, and message: MessageType, at indexPath: IndexPath) -> [NSAttributedStringKey: Any] {
@@ -306,51 +309,50 @@ extension ConversationViewController: MessagesDisplayDelegate {
     }
 
     func enabledDetectors(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> [DetectorType] {
-        return [.url, .address, .phoneNumber, .date, .transitInformation]
+        return [.url, .address, .phoneNumber, .date]
     }
 
     // MARK: - All Messages
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
-        return isFromCurrentSender(message: message) ? UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1) : UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
+        
+        if isFromCurrentSender(message: message) {
+            return UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1)
+        }
+        return UIColor(red: 230/255, green: 230/255, blue: 230/255, alpha: 1)
     }
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-        let corner: MessageStyle.TailCorner = isFromCurrentSender(message: message) ? .bottomRight : .bottomLeft
-        return .bubbleTail(corner, .curved)
-//        let configurationClosure = { (view: MessageContainerView) in}
-//        return .custom(configurationClosure)
+
+        if isFromCurrentSender(message: message) {
+            let configurationClosure = { (view: MessageContainerView) in
+                super.view.layoutSubviews()
+                let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight, UIRectCorner.bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
+                
+                let mask = CAShapeLayer()
+                mask.path = path.cgPath
+                view.layer.mask = mask
+                
+            }
+            return .custom(configurationClosure)
+        } else {
+            let configurationClosure = { (view: MessageContainerView) in
+                super.view.layoutSubviews()
+                let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight, UIRectCorner.bottomRight], cornerRadii: CGSize(width: 10.0, height: 10.0))
+                
+                let mask = CAShapeLayer()
+                mask.path = path.cgPath
+                view.layer.mask = mask
+                
+            }
+            return .custom(configurationClosure)
+        }
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let avatar = SampleData.shared.getAvatarFor(sender: message.sender)
+//        avatarView.frame.origin.y -= 16.0
         avatarView.set(avatar: avatar)
-    }
-
-    // MARK: - Location Messages
-
-    func annotationViewForLocation(message: MessageType, at indexPath: IndexPath, in messageCollectionView: MessagesCollectionView) -> MKAnnotationView? {
-        let annotationView = MKAnnotationView(annotation: nil, reuseIdentifier: nil)
-        let pinImage = #imageLiteral(resourceName: "pin")
-        annotationView.image = pinImage
-        annotationView.centerOffset = CGPoint(x: 0, y: -pinImage.size.height / 2)
-        return annotationView
-    }
-
-    func animationBlockForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> ((UIImageView) -> Void)? {
-        return { view in
-            view.layer.transform = CATransform3DMakeScale(0, 0, 0)
-            view.alpha = 0.0
-            UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 0, options: [], animations: {
-                view.layer.transform = CATransform3DIdentity
-                view.alpha = 1.0
-            }, completion: nil)
-        }
-    }
-    
-    func snapshotOptionsForLocation(message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> LocationMessageSnapshotOptions {
-        
-        return LocationMessageSnapshotOptions()
     }
 }
 
@@ -359,9 +361,6 @@ extension ConversationViewController: MessagesDisplayDelegate {
 extension ConversationViewController: MessagesLayoutDelegate {
 
     func cellTopLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
-        if indexPath.section % 3 == 0 {
-            return 10
-        }
         return 0
     }
     
@@ -371,6 +370,10 @@ extension ConversationViewController: MessagesLayoutDelegate {
 
     func messageBottomLabelHeight(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return 16
+    }
+    
+    func avatarPosition(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> AvatarPosition {
+        return AvatarPosition.init(horizontal: AvatarPosition.Horizontal.natural, vertical: AvatarPosition.Vertical.messageBottom)
     }
 
 }
@@ -405,26 +408,9 @@ extension ConversationViewController: MessageCellDelegate {
 
 extension ConversationViewController: MessageLabelDelegate {
 
-    func didSelectAddress(_ addressComponents: [String: String]) {
-        print("Address Selected: \(addressComponents)")
-    }
-
-    func didSelectDate(_ date: Date) {
-        print("Date Selected: \(date)")
-    }
-
-    func didSelectPhoneNumber(_ phoneNumber: String) {
-        print("Phone Number Selected: \(phoneNumber)")
-    }
-
     func didSelectURL(_ url: URL) {
         print("URL Selected: \(url)")
     }
-    
-    func didSelectTransitInformation(_ transitInformation: [String: String]) {
-        print("TransitInformation Selected: \(transitInformation)")
-    }
-
 }
 
 // MARK: - MessageInputBarDelegate
@@ -440,12 +426,13 @@ extension ConversationViewController: MessageInputBarDelegate {
             if let image = component as? UIImage {
                 
                 let imageMessage = MockMessage(image: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+                
                 messageList.append(imageMessage)
                 messagesCollectionView.insertSections([messageList.count - 1])
                 
             } else if let text = component as? String {
                 
-                let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.blue])
+                let attributedText = NSAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 15), .foregroundColor: UIColor.white])
                 
                 let message = MockMessage(attributedText: attributedText, sender: currentSender(), messageId: UUID().uuidString, date: Date())
                 messageList.append(message)

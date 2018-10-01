@@ -31,12 +31,15 @@ final internal class InboxViewController: UITableViewController {
     let cells = ["Example", "Settings", "Source Code", "Contributors"]
     
     // MARK: - View Life Cycle
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "MessageKit"
         navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.barTintColor = UIColor(red: 69/255, green: 193/255, blue: 89/255, alpha: 1)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.bold) ]
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.tableFooterView = UIView()

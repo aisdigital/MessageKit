@@ -70,27 +70,9 @@ final internal class SampleData {
 
     var now = Date()
 
-    let messageTypes = ["Text", "Text", "Text", "AttributedText", "Photo", "Video", "Location", "Emoji"]
+    let messageTypes = ["Text", "Photo"]
 
-    let attributes = ["Font1", "Font2", "Font3", "Font4", "Color", "Combo"]
-
-    let locations: [CLLocation] = [
-        CLLocation(latitude: 37.3118, longitude: -122.0312),
-        CLLocation(latitude: 33.6318, longitude: -100.0386),
-        CLLocation(latitude: 29.3358, longitude: -108.8311),
-        CLLocation(latitude: 39.3218, longitude: -127.4312),
-        CLLocation(latitude: 35.3218, longitude: -127.4314),
-        CLLocation(latitude: 39.3218, longitude: -113.3317)
-    ]
-
-    let emojis = [
-        "👍",
-        "👋",
-        "👋👋👋",
-        "😱😱",
-        "🎈",
-        "🇧🇷"
-    ]
+    let attributes = ["Font1"]
 
     func attributedString(with text: String) -> NSAttributedString {
         let nsString = NSString(string: text)
@@ -147,8 +129,8 @@ final internal class SampleData {
         let randomNumberText = Int(arc4random_uniform(UInt32(messageTextValues.count)))
         let randomNumberImage = Int(arc4random_uniform(UInt32(messageImages.count)))
         let randomMessageType = Int(arc4random_uniform(UInt32(messageTypes.count)))
-        let randomNumberLocation = Int(arc4random_uniform(UInt32(locations.count)))
-        let randomNumberEmoji = Int(arc4random_uniform(UInt32(emojis.count)))
+        
+
         let uniqueID = NSUUID().uuidString
         let sender = senders[randomNumberSender]
         let date = dateAddingRandomTime()
@@ -156,19 +138,9 @@ final internal class SampleData {
         switch messageTypes[randomMessageType] {
         case "Text":
             return MockMessage(text: messageTextValues[randomNumberText], sender: sender, messageId: uniqueID, date: date)
-        case "AttributedText":
-            let attributedText = attributedString(with: messageTextValues[randomNumberText])
-            return MockMessage(attributedText: attributedText, sender: senders[randomNumberSender], messageId: uniqueID, date: date)
         case "Photo":
             let image = messageImages[randomNumberImage]
             return MockMessage(image: image, sender: sender, messageId: uniqueID, date: date)
-        case "Video":
-            let image = messageImages[randomNumberImage]
-            return MockMessage(thumbnail: image, sender: sender, messageId: uniqueID, date: date)
-        case "Location":
-            return MockMessage(location: locations[randomNumberLocation], sender: sender, messageId: uniqueID, date: date)
-        case "Emoji":
-            return MockMessage(emoji: emojis[randomNumberEmoji], sender: sender, messageId: uniqueID, date: date)
         default:
             fatalError("Unrecognized mock message type")
         }

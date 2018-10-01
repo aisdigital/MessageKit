@@ -268,8 +268,8 @@ internal class ConversationViewController: MessagesViewController {
         guard let image = SampleData.shared.messageImages.randomElement() else { return }
         
         let imageMessage = MockMessage(image: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-        
-        messageList.append(imageMessage)
+        let vid = MockMessage.init(thumbnail: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+        messageList.append(vid)
         messagesCollectionView.insertSections([messageList.count - 1])
 
         messagesCollectionView.scrollToBottom()

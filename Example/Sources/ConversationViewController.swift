@@ -344,7 +344,7 @@ extension ConversationViewController: MessagesDisplayDelegate {
     }
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
-
+        
         if isFromCurrentSender(message: message) {
             let configurationClosure = { (view: MessageContainerView) in
             
@@ -354,8 +354,6 @@ extension ConversationViewController: MessagesDisplayDelegate {
                 let mask = CAShapeLayer()
                 mask.path = path.cgPath
                 view.layer.mask = mask
-                
-                
             }
             return .custom(configurationClosure)
         } else {

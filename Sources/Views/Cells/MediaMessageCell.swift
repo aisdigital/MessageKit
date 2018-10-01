@@ -73,8 +73,6 @@ open class MediaMessageCell: MessageContentCell {
         default:
             break
         }
-        imageView.frame.size.height -= 3.0
-        imageView.frame.size.width -= 3.0
         displayDelegate.configureMediaMessageImageView(imageView, for: message, at: indexPath, in: messagesCollectionView)
     }
 }

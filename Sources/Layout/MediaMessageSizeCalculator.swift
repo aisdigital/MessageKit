@@ -33,7 +33,7 @@ open class MediaMessageSizeCalculator: MessageSizeCalculator {
             if maxWidth < item.size.width {
                 // Maintain the ratio if width is too great
                 let height = maxWidth * item.size.height / item.size.width
-                return CGSize(width: maxWidth, height: height)
+                return CGSize(width: maxWidth - 3.0, height: height - 3.0)
             }
             return item.size
         }

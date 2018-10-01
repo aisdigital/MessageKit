@@ -44,7 +44,7 @@ open class MediaMessageCell: MessageContentCell {
 
     /// Responsible for setting up the constraints of the cell's subviews.
     open func setupConstraints() {
-        layoutImageView()
+        imageView.fillSuperview()
         playButtonView.centerInSuperview()
         playButtonView.constraint(equalTo: CGSize(width: 35, height: 35))
     }
@@ -74,11 +74,5 @@ open class MediaMessageCell: MessageContentCell {
             break
         }
         displayDelegate.configureMediaMessageImageView(imageView, for: message, at: indexPath, in: messagesCollectionView)
-    }
-    
-    func layoutImageView() {
-        imageView.fillSuperview()
-        imageView.layer.borderWidth = 3.0
-        imageView.layer.borderColor = UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
     }
 }

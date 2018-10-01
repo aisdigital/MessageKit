@@ -346,34 +346,25 @@ extension ConversationViewController: MessagesDisplayDelegate {
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
         
         if isFromCurrentSender(message: message) {
-            let configurationClosure = { (view: MessageContainerView) in
-            
-                super.view.layoutSubviews()
-                let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight, UIRectCorner.bottomLeft], cornerRadii: CGSize(width: 10.0, height: 10.0))
-                
-                let mask = CAShapeLayer()
-                mask.path = path.cgPath
-                view.layer.mask = mask
-            }
-            return .custom(configurationClosure)
-        } else {
-            let configurationClosure = { (view: MessageContainerView) in
-                super.view.layoutSubviews()
-                let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: [UIRectCorner.topLeft, UIRectCorner.topRight, UIRectCorner.bottomRight], cornerRadii: CGSize(width: 10.0, height: 10.0))
-                
-                let mask = CAShapeLayer()
-                mask.path = path.cgPath
-                view.layer.mask = mask
-                
-            }
-            return .custom(configurationClosure)
+            return LayoutStyleUtil.shared.outgoingContainerLayout
         }
+        
+        return LayoutStyleUtil.shared.incomingContainerLayout
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let avatar = SampleData.shared.getAvatarFor(sender: message.sender)
-//        avatarView.frame.origin.y -= 16.0
         avatarView.set(avatar: avatar)
+    }
+    
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        
+        imageView.layer.cornerRadius = 10.0
+        imageView.clipsToBounds = true
+        
+        imageView.layer.borderWidth = 5.0
+        imageView.layer.borderColor = UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+        
     }
 }
 

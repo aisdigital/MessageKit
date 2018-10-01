@@ -77,6 +77,7 @@ open class MediaMessageCell: MessageContentCell {
     }
     
     func layoutImageView() {
+        imageView.fillSuperview()
         imageView.layer.borderWidth = 3.0
         imageView.layer.borderColor = UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
     }

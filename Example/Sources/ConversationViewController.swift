@@ -373,7 +373,7 @@ extension ConversationViewController: MessagesLayoutDelegate {
     }
     
     func avatarPosition(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> AvatarPosition {
-        return AvatarPosition.init(horizontal: AvatarPosition.Horizontal.natural, vertical: AvatarPosition.Vertical.messageBottom)
+        return AvatarPosition(horizontal: AvatarPosition.Horizontal.natural, vertical: AvatarPosition.Vertical.messageBottom)
     }
 
 }

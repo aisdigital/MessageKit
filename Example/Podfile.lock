@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MessageKit:
-    :commit: 81dabb9c7318c2bc48d06cb14377d609457196c8
+    :commit: 2f65edeefba0a18772fd7890c8fb995aa5659d3b
     :git: "git@github.com:lfap/MessageKit.git"
 
 SPEC CHECKSUMS:
-  MessageKit: c18104157962d1dd52e9d3bee5704ab7e2306e30
+  MessageKit: 8049a0e877ca3c2b7eba5911861b23a56b78a6b0
 
 PODFILE CHECKSUM: 732be57e1f3f594aa31115e843f3c0976b31f747
 

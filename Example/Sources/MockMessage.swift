@@ -93,5 +93,9 @@ internal struct MockMessage: MessageType {
     init(emoji: String, sender: Sender, messageId: String, date: Date) {
         self.init(kind: .emoji(emoji), sender: sender, messageId: messageId, date: date)
     }
+    
+    init(docName: String, sender: Sender, messageId: String, date: Date) {
+        self.init(kind: MessageKind.custom(docName), sender: sender, messageId: messageId, date: date)
+    }
 
 }

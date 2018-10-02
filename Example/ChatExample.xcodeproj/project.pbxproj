@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2CB9E38A2162925B008A8E7D /* LayoutStyleUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E3892162925B008A8E7D /* LayoutStyleUtil.swift */; };
+		2CB9E38D2163D316008A8E7D /* FileMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9E38B2163D316008A8E7D /* FileMessageCell.swift */; };
+		2CB9E38E2163D316008A8E7D /* FileMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB9E38C2163D316008A8E7D /* FileMessageCell.xib */; };
 		37D3EAC41F390E5F00DD6A55 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37D3EAC31F390E5F00DD6A55 /* SampleData.swift */; };
 		47041B41D65261659B89D781 /* Pods_ChatExampleUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13D2F222B2C93C3EFB3F0C24 /* Pods_ChatExampleUITests.framework */; };
 		5E8E64CC1AD872F7D2DA124D /* Pods_ChatExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF3B2EC06B6989F88ED3231 /* Pods_ChatExampleTests.framework */; };
@@ -60,6 +62,8 @@
 		1B0334D2DA5E800D1896ECED /* Pods-ChatExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatExample/Pods-ChatExample.debug.xcconfig"; sourceTree = "<group>"; };
 		2AA8257BB3B7FB1CD3B24CE8 /* Pods-ChatExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatExample/Pods-ChatExample.release.xcconfig"; sourceTree = "<group>"; };
 		2CB9E3892162925B008A8E7D /* LayoutStyleUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutStyleUtil.swift; sourceTree = "<group>"; };
+		2CB9E38B2163D316008A8E7D /* FileMessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileMessageCell.swift; sourceTree = "<group>"; };
+		2CB9E38C2163D316008A8E7D /* FileMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileMessageCell.xib; sourceTree = "<group>"; };
 		37D3EAC31F390E5F00DD6A55 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		391ECAA0990C55FAF9D82F78 /* Pods-ChatExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChatExampleTests/Pods-ChatExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A20C0B22C7FC759C740B5B1 /* Pods-ChatExampleUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatExampleUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChatExampleUITests/Pods-ChatExampleUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -151,6 +155,8 @@
 				CAB36EA02007A573009995ED /* TableViewCells.swift */,
 				CAB36EA22007B1B7009995ED /* Settings+UserDefaults.swift */,
 				2CB9E3892162925B008A8E7D /* LayoutStyleUtil.swift */,
+				2CB9E38B2163D316008A8E7D /* FileMessageCell.swift */,
+				2CB9E38C2163D316008A8E7D /* FileMessageCell.xib */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 			files = (
 				882B5E821CF7D53600B6E160 /* Assets.xcassets in Resources */,
 				882B5E831CF7D53600B6E160 /* LaunchScreen.storyboard in Resources */,
+				2CB9E38E2163D316008A8E7D /* FileMessageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +435,7 @@
 				882B5E871CF7D53600B6E160 /* SettingsViewController.swift in Sources */,
 				37D3EAC41F390E5F00DD6A55 /* SampleData.swift in Sources */,
 				B096438B1F288D47004D0129 /* MockMessage.swift in Sources */,
+				2CB9E38D2163D316008A8E7D /* FileMessageCell.swift in Sources */,
 				882B5E811CF7D53600B6E160 /* AppDelegate.swift in Sources */,
 				B0655A331F23E90800542A83 /* ConversationViewController.swift in Sources */,
 				882B5E851CF7D53600B6E160 /* InboxViewController.swift in Sources */,

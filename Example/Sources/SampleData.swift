@@ -67,7 +67,8 @@ final internal class SampleData {
     }
 
     let messageImages: [UIImage] = [#imageLiteral(resourceName: "Dan-Leonard"), #imageLiteral(resourceName: "Tim-Cook"), #imageLiteral(resourceName: "Steve-Jobs"), UIImage(named: "frog")!]
-
+    let docNames: [String] = ["loudo_001.pdf", "bula.pdf", "capsula.docx"]
+    
     var now = Date()
 
     let messageTypes = ["Text", "Photo"]

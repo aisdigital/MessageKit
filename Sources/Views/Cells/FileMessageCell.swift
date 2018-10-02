@@ -26,10 +26,8 @@ open class FileMessageCell: MessageContentCell {
         
         fileImageView.translatesAutoresizingMaskIntoConstraints = false
         fileNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        setNeedsLayout()
-        layoutIfNeeded()
-        layoutSubviews()
-        let fileImageViewLeftConstraint = fileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 50)
+        
+        let fileImageViewLeftConstraint = fileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15)
         let fileImageViewCenterYConstraint = fileImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         let fileImageViewHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
         let fileImageViewWidthConstraint = fileImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
@@ -54,9 +52,6 @@ open class FileMessageCell: MessageContentCell {
         messageContainerView.addSubview(fileImageView)
         messageContainerView.addSubview(fileNameLabel)
         setupConstraints()
-        
-        setNeedsLayout()
-        layoutIfNeeded()
     }
     
     open override func configure(with message: MessageType, at indexPath: IndexPath, and messagesCollectionView: MessagesCollectionView) {

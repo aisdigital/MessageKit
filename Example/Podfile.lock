@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   MessageKit:
-    :commit: 6843d4d0b3a6e52d06262b1a0455c447cc16350f
+    :commit: 739d2fb89fe70167a1d7a4fc06b66114f70a6164
     :git: "git@github.com:lfap/MessageKit.git"
 
 SPEC CHECKSUMS:

@@ -446,12 +446,7 @@ extension ConversationViewController: MessageInputBarDelegate {
                 messageList.append(message)
                 
                 messagesCollectionView.insertSections([messageList.count - 1])
-                
-                messagesCollectionView.reloadSections([messageList.count - 1])
-                
-                view.layoutSubviews()
             }
-            
         }
         
         inputBar.inputTextView.text = String()

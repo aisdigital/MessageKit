@@ -27,10 +27,10 @@ open class FileMessageCell: MessageContentCell {
         fileImageView.translatesAutoresizingMaskIntoConstraints = false
         fileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let fileImageViewLeftConstraint = fileImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 15)
-        let fileImageViewCenterYConstraint = fileImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
-        let fileImageViewHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
-        let fileImageViewWidthConstraint = fileImageView.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.8)
+        let fileImageViewLeftConstraint = fileImageView.leftAnchor.constraint(equalTo: messageContainerView.leftAnchor, constant: 15)
+        let fileImageViewCenterYConstraint = fileImageView.centerYAnchor.constraint(equalTo: messageContainerView.centerYAnchor)
+        let fileImageViewHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
+        let fileImageViewWidthConstraint = fileImageView.widthAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
         
         //Label
         let labelLeftConstraint = fileNameLabel.leftAnchor.constraint(equalTo: fileImageView.rightAnchor, constant: 10)

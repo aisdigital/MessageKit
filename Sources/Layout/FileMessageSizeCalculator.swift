@@ -10,13 +10,13 @@ import UIKit
 
 open class FileMessageSizeCalculator: MessageSizeCalculator {
     open override func messageContainerSize(for message: MessageType) -> CGSize {
-        switch message.kind {
-        case .file:
+        
+        if case .file = message.kind {
             let maxWidth = messageContainerMaxWidth(for: message)
             let height = maxWidth * 0.2
             return CGSize(width: maxWidth, height: height)
-        default:
-            fatalError("messageContainerSize received unhandled MessageDataType: \(message.kind)")
         }
+        
+        fatalError("messageContainerSize received unhandled MessageDataType: \(message.kind)")
     }
 }

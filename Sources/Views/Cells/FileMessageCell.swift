@@ -18,6 +18,9 @@ open class FileMessageCell: MessageContentCell {
         imageView.layer.cornerRadius = 10
         imageView.clipsToBounds = true
         
+        let image = UIImage(named: "fileIcon")
+        imageView.image = image
+        
         return imageView
     }()
     

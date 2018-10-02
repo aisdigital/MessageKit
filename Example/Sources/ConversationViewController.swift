@@ -391,6 +391,14 @@ extension ConversationViewController: MessagesDisplayDelegate {
         messagesCollectionView.cellForItem(at: indexPath)?.layoutSubviews()
         
     }
+    
+    func configureFileMessageImageView(_ label: UILabel, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        if !isFromCurrentSender(message: message) {
+            label.textColor = UIColor.gray
+        }
+        
+        label.textColor = UIColor.white
+    }
 }
 
 // MARK: - MessagesLayoutDelegate

@@ -13,14 +13,6 @@ open class FileMessageCell: MessageContentCell {
     private var fileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = ContentMode.scaleAspectFit
-        imageView.backgroundColor = UIColor.white
-        
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        
-        let image = UIImage(named: "fileIcon")
-        imageView.image = image
-        
         return imageView
     }()
     
@@ -60,6 +52,9 @@ open class FileMessageCell: MessageContentCell {
         messageContainerView.addSubview(fileImageView)
         messageContainerView.addSubview(fileNameLabel)
         setupConstraints()
+        
+        setNeedsLayout()
+        layoutIfNeeded()
     }
     
     open override func configure(with message: MessageType, at indexPath: IndexPath, and messagesCollectionView: MessagesCollectionView) {
@@ -76,6 +71,8 @@ open class FileMessageCell: MessageContentCell {
             break
         }
         
-        displayDelegate.configureFileMessageImageView(fileNameLabel, for: message, at: indexPath, in: messagesCollectionView)
+        displayDelegate.configureFileMessageLabel(fileNameLabel, for: message, at: indexPath, in: messagesCollectionView)
+        
+        displayDelegate.configureFileMessageImageView(fileImageView, for: message, at: indexPath, in: messagesCollectionView)
     }
 }

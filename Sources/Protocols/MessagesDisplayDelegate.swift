@@ -161,6 +161,17 @@ public protocol MessagesDisplayDelegate: AnyObject {
     ///   - messagesCollectionView: The `MessagesCollectionView` in which this cell will be displayed.
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView)
 
+    // MARK: - File Messages
+    
+    /// Used to configure the `UILabel` of a `FileMessageCell.
+    ///
+    /// - Parameters:
+    ///   - label: The `UILabel` of the cell.
+    ///   - message: The `MessageType` that will be displayed by this cell.
+    ///   - indexPath: The `IndexPath` of the cell.
+    ///   - messagesCollectionView: The `MessagesCollectionView` in which this cell will be displayed.
+    func configureFileMessageImageView(_ label: UILabel, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView)
+
 }
 
 public extension MessagesDisplayDelegate {
@@ -228,5 +239,9 @@ public extension MessagesDisplayDelegate {
     // MARK: - Media Message Defaults
 
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    }
+    
+    // MARK: - File Message Defaults
+    func configureFileMessageImageView(_ label: UILabel, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
     }
 }

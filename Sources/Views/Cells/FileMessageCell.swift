@@ -13,6 +13,11 @@ open class FileMessageCell: MessageContentCell {
     private var fileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = ContentMode.scaleAspectFit
+        imageView.backgroundColor = UIColor.white
+        
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        
         return imageView
     }()
     
@@ -56,12 +61,18 @@ open class FileMessageCell: MessageContentCell {
     
     open override func configure(with message: MessageType, at indexPath: IndexPath, and messagesCollectionView: MessagesCollectionView) {
         super.configure(with: message, at: indexPath, and: messagesCollectionView)
-                
+
+        guard let displayDelegate = messagesCollectionView.messagesDisplayDelegate else {
+            fatalError(MessageKitError.nilMessagesDisplayDelegate)
+        }
+        
         switch message.kind {
         case .file(let fileName):
             fileNameLabel.text = fileName
         default:
             break
         }
+        
+        displayDelegate.configureFileMessageImageView(fileNameLabel, for: message, at: indexPath, in: messagesCollectionView)
     }
 }

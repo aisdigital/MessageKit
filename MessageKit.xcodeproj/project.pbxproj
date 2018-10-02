@@ -82,7 +82,6 @@
 		B7A03F6C1F8669EB006AEF79 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A03F661F8669EB006AEF79 /* UIView+Extensions.swift */; };
 		B7A03F6D1F8669EB006AEF79 /* Bundle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A03F671F8669EB006AEF79 /* Bundle+Extensions.swift */; };
 		B7A03F6E1F8669EB006AEF79 /* NSAttributedString+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A03F681F8669EB006AEF79 /* NSAttributedString+Extensions.swift */; };
-		B7A03F731F866A06006AEF79 /* MessageKit+Availability.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A03F701F866A06006AEF79 /* MessageKit+Availability.swift */; };
 		B7A03F751F866A06006AEF79 /* MessageKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B7A03F721F866A06006AEF79 /* MessageKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B7A03F7B1F866B85006AEF79 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7A03F7A1F866B85006AEF79 /* MessageCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -188,7 +187,6 @@
 		B7A03F661F8669EB006AEF79 /* UIView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		B7A03F671F8669EB006AEF79 /* Bundle+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+Extensions.swift"; sourceTree = "<group>"; };
 		B7A03F681F8669EB006AEF79 /* NSAttributedString+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Extensions.swift"; sourceTree = "<group>"; };
-		B7A03F701F866A06006AEF79 /* MessageKit+Availability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MessageKit+Availability.swift"; sourceTree = "<group>"; };
 		B7A03F711F866A06006AEF79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7A03F721F866A06006AEF79 /* MessageKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageKit.h; sourceTree = "<group>"; };
 		B7A03F7A1F866B85006AEF79 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -458,7 +456,6 @@
 			children = (
 				B7A03F711F866A06006AEF79 /* Info.plist */,
 				B7A03F721F866A06006AEF79 /* MessageKit.h */,
-				B7A03F701F866A06006AEF79 /* MessageKit+Availability.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -636,7 +633,6 @@
 				B7A03F4D1F86694F006AEF79 /* MessagesCollectionView.swift in Sources */,
 				0EF0888C206F7E83007F2F58 /* CellSizeCalculator.swift in Sources */,
 				1FE783A4206629A5007FA024 /* MediaMessageSizeCalculator.swift in Sources */,
-				B7A03F731F866A06006AEF79 /* MessageKit+Availability.swift in Sources */,
 				1FE7839E20662835007FA024 /* MessageSizeCalculator.swift in Sources */,
 				1FE783A6206629C2007FA024 /* LocationMessageSizeCalculator.swift in Sources */,
 				B7A03F2D1F866895006AEF79 /* LabelAlignment.swift in Sources */,

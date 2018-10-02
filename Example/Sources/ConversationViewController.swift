@@ -42,7 +42,7 @@ internal class ConversationViewController: MessagesViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        slack()
         let messagesToFetch = UserDefaults.standard.mockMessagesCount()
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -268,8 +268,7 @@ internal class ConversationViewController: MessagesViewController {
         guard let image = SampleData.shared.messageImages.randomElement() else { return }
         
         let imageMessage = MockMessage(image: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-        let vid = MockMessage.init(thumbnail: image, sender: currentSender(), messageId: UUID().uuidString, date: Date())
-        messageList.append(vid)
+        messageList.append(imageMessage)
         messagesCollectionView.insertSections([messageList.count - 1])
 
         messagesCollectionView.scrollToBottom()
@@ -344,12 +343,12 @@ extension ConversationViewController: MessagesDisplayDelegate {
     }
 
     func messageStyle(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageStyle {
+        messagesCollectionView.layoutSubviews()
         
-        if isFromCurrentSender(message: message) {
-            return LayoutStyleUtil.shared.outgoingContainerLayout
+        if !isFromCurrentSender(message: message) {
+            return LayoutStyleUtil.shared.createLayoutForIncomingMessage(messageKind: message.kind, superView: self.view)
         }
-        
-        return LayoutStyleUtil.shared.incomingContainerLayout
+        return LayoutStyleUtil.shared.createLayoutForOutgoingMessage(messageKind: message.kind, superView: self.view)
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
@@ -359,11 +358,9 @@ extension ConversationViewController: MessagesDisplayDelegate {
     
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
-        imageView.layer.cornerRadius = 10.0
-        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
         
-        imageView.layer.borderWidth = 5.0
-        imageView.layer.borderColor = UIColor(red: 200/255, green: 0/255, blue: 0/255, alpha: 1.0).cgColor
+        messagesCollectionView.cellForItem(at: indexPath)?.layoutSubviews()
         
     }
 }
@@ -387,7 +384,6 @@ extension ConversationViewController: MessagesLayoutDelegate {
     func avatarPosition(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> AvatarPosition {
         return AvatarPosition(horizontal: AvatarPosition.Horizontal.natural, vertical: AvatarPosition.Vertical.messageBottom)
     }
-
 }
 
 // MARK: - MessageCellDelegate
@@ -448,7 +444,12 @@ extension ConversationViewController: MessageInputBarDelegate {
                 
                 let message = MockMessage(attributedText: attributedText, sender: currentSender(), messageId: UUID().uuidString, date: Date())
                 messageList.append(message)
+                
                 messagesCollectionView.insertSections([messageList.count - 1])
+                
+                messagesCollectionView.reloadSections([messageList.count - 1])
+                
+                view.layoutSubviews()
             }
             
         }

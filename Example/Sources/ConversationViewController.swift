@@ -392,12 +392,23 @@ extension ConversationViewController: MessagesDisplayDelegate {
         
     }
     
-    func configureFileMessageImageView(_ label: UILabel, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+    func configureFileMessageLabel(_ label: UILabel, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         if !isFromCurrentSender(message: message) {
             label.textColor = UIColor.gray
         }
         
         label.textColor = UIColor.white
+    }
+    
+    func configureFileMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView:  MessagesCollectionView) {
+        
+        let image = UIImage(named: "docIcon")
+        imageView.image = image
+        
+        imageView.backgroundColor = UIColor.white
+        
+        imageView.layer.cornerRadius = 10.0
+
     }
 }
 

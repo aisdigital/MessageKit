@@ -44,7 +44,8 @@ internal class ConversationViewController: MessagesViewController {
         super.viewDidLoad()
         slack()
         let messagesToFetch = UserDefaults.standard.mockMessagesCount()
-        
+        messagesCollectionView.register(FileMessageCell.self)
+
         DispatchQueue.global(qos: .userInitiated).async {
             SampleData.shared.getMessages(count: messagesToFetch) { messages in
                 DispatchQueue.main.async {
@@ -54,6 +55,7 @@ internal class ConversationViewController: MessagesViewController {
                 }
             }
         }
+        
 
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
@@ -254,13 +256,22 @@ internal class ConversationViewController: MessagesViewController {
                 
                 switch buttonName {
                 case "ic_library":
-                    
                     self.sendImage()
-                    
+                case "ic_hashtag":
+                    self.sendDoc()
                 default:
                     print("Item tapped")
                 }
         }
+    }
+    
+    fileprivate func sendDoc() {
+        guard let name = SampleData.shared.docNames.randomElement() else { return }
+        let docMessage = MockMessage(docName: name, sender: currentSender(), messageId: UUID().uuidString, date: Date())
+        messageList.append(docMessage)
+        messagesCollectionView.insertSections([messageList.count - 1])
+        
+        messagesCollectionView.scrollToBottom()
     }
     
     fileprivate func sendImage() {
@@ -272,6 +283,21 @@ internal class ConversationViewController: MessagesViewController {
         messagesCollectionView.insertSections([messageList.count - 1])
 
         messagesCollectionView.scrollToBottom()
+    }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        guard let messagesDataSource = messagesCollectionView.messagesDataSource else {
+            fatalError("Ouch. nil data source for message")
+        }
+        
+        let message = messagesDataSource.messageForItem(at: indexPath, in: messagesCollectionView)
+        
+        if case .custom = message.kind {
+            let cell = messagesCollectionView.dequeueReusableCell(MessageKit.FileMessageCell.self, for: indexPath)
+            cell.fileNameLabel.text = "file.pdf"
+            return cell
+        }
+        return super.collectionView(collectionView, cellForItemAt: indexPath)
     }
 }
 
@@ -307,6 +333,8 @@ extension ConversationViewController: MessagesDataSource {
         
         return NSAttributedString(string: final)
     }
+
+    
 }
 
 // MARK: - MessagesDisplayDelegate

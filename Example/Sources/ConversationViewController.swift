@@ -55,8 +55,7 @@ internal class ConversationViewController: MessagesViewController {
                 }
             }
         }
-        
-
+    
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
@@ -333,8 +332,6 @@ extension ConversationViewController: MessagesDataSource {
         
         return NSAttributedString(string: final)
     }
-
-    
 }
 
 // MARK: - MessagesDisplayDelegate
@@ -400,14 +397,14 @@ extension ConversationViewController: MessagesDisplayDelegate {
         label.textColor = UIColor.white
     }
     
-    func configureFileMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView:  MessagesCollectionView) {
+    func configureFileMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         
         let image = UIImage(named: "docIcon")
         imageView.image = image
         
         imageView.backgroundColor = UIColor.white
         
-        imageView.layer.cornerRadius = 10.0
+        imageView.layer.cornerRadius = 5.0
 
     }
 }

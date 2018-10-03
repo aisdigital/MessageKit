@@ -27,11 +27,16 @@ open class FileMessageCell: MessageContentCell {
         fileImageView.translatesAutoresizingMaskIntoConstraints = false
         fileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        let baseHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 1.0)
+        
         let leftMarginConstraint = NSLayoutConstraint(item: fileImageView, attribute: NSLayoutAttribute.left, relatedBy: NSLayoutRelation.equal, toItem: messageContainerView, attribute: NSLayoutAttribute.left, multiplier: 0.1, constant: messageContainerView.frame.height)
 //        let fileImageViewLeftConstraint = fileImageView.leftAnchor.constraint(equalTo: messageContainerView.leftAnchor, constant: messageContainerView.frame.height * 0.1)
         let fileImageViewCenterYConstraint = fileImageView.centerYAnchor.constraint(equalTo: messageContainerView.centerYAnchor)
         let fileImageViewHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
         let fileImageViewWidthConstraint = fileImageView.widthAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
+        
+        
+        let leftMargin = fileImageView.leftAnchor.constraint(equalTo: messageContainerView.leftAnchor, constant: baseHeightConstraint.constant * 0.1)
         
         //Label
         let labelLeftConstraint = fileNameLabel.leftAnchor.constraint(equalTo: fileImageView.rightAnchor, constant: 10)
@@ -39,7 +44,7 @@ open class FileMessageCell: MessageContentCell {
         let labelCenterYConstraint = fileNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         
         NSLayoutConstraint.activate([
-            leftMarginConstraint,
+            leftMargin,
             fileImageViewCenterYConstraint,
             fileImageViewHeightConstraint,
             fileImageViewWidthConstraint,

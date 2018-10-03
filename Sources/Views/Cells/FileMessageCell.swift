@@ -22,24 +22,24 @@ open class FileMessageCell: MessageContentCell {
         return label
     }()
     
+    private var leftMarginConstraint: NSLayoutConstraint?
+    
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        let margin: CGFloat = messageContainerView.frame.height * 0.1
+        leftMarginConstraint?.constant = margin
+    }
+    
     open func setupConstraints() {
         
         fileImageView.translatesAutoresizingMaskIntoConstraints = false
         fileNameLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        
-        setNeedsLayout()
-        layoutIfNeeded()
-        updateConstraintsIfNeeded()
-        
-        let margin = messageContainerView.frame.height * 0.1
-        let a = fileImageView.leftAnchor.constraint(equalTo: messageContainerView.leftAnchor, constant: margin)
-        
-        
+        let leftMarginConstraint = fileImageView.leftAnchor.constraint(equalTo: messageContainerView.leftAnchor, constant: 0.0)
         let fileImageViewCenterYConstraint = fileImageView.centerYAnchor.constraint(equalTo: messageContainerView.centerYAnchor)
         let fileImageViewHeightConstraint = fileImageView.heightAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
         let fileImageViewWidthConstraint = fileImageView.widthAnchor.constraint(equalTo: messageContainerView.heightAnchor, multiplier: 0.8)
-        
         
         //Label
         let labelLeftConstraint = fileNameLabel.leftAnchor.constraint(equalTo: fileImageView.rightAnchor, constant: 10)
@@ -47,6 +47,7 @@ open class FileMessageCell: MessageContentCell {
         let labelCenterYConstraint = fileNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         
         NSLayoutConstraint.activate([
+            leftMarginConstraint,
             fileImageViewCenterYConstraint,
             fileImageViewHeightConstraint,
             fileImageViewWidthConstraint,
@@ -54,7 +55,7 @@ open class FileMessageCell: MessageContentCell {
             labelRightConstraint,
             labelCenterYConstraint])
         
-        
+        self.leftMarginConstraint = leftMarginConstraint
     }
     
     open override func setupSubviews() {

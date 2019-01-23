@@ -59,7 +59,7 @@ open class FileMessageCell: MessageContentCell {
         
         //Label
         let labelLeftConstraint = fileNameLabel.leftAnchor.constraint(equalTo: fileImageView.rightAnchor, constant: 10)
-        let labelRightConstraint = fileNameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 15)
+        let labelRightConstraint = fileNameLabel.rightAnchor.constraint(equalTo: messageContainerView.rightAnchor, constant: -25)
         let labelCenterYConstraint = fileNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
         
         NSLayoutConstraint.activate([
@@ -89,8 +89,12 @@ open class FileMessageCell: MessageContentCell {
         }
         
         switch message.kind {
-        case .file(let fileName):
-            fileNameLabel.text = fileName
+        case .file(let fileName, let path):
+            if let fileNameUnwrapped = fileName {
+                fileNameLabel.text = fileNameUnwrapped
+            } else {
+                fileNameLabel.text = path.lastPathComponent
+            }
         default:
             break
         }

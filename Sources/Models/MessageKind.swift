@@ -52,7 +52,7 @@ public enum MessageKind {
     case emoji(String)
     
     /// The
-    case file(String)
+    case file(name: String?, path: URL)
 
     /// A custom message.
     /// - Note: Using this case requires that you override the following methods and handle this case:
